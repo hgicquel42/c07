@@ -61,13 +61,8 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 	int		l;
 	int		k;
 
-	if (size)
-	{
-		l = ft_strlen_all(size, strs, sep);
-		result = malloc(l * sizeof(char));
-	}
-	else
-		result = malloc(sizeof(char));
+	l = ft_strlen_all(size, strs, sep);
+	result = malloc((l + 1) * sizeof(char));
 	k = 0;
 	i = 0;
 	while (i < size)
