@@ -89,8 +89,6 @@ void	ft_fill(char **strs, char *str, char *charset, int l)
 char	**ft_split(char *str, char *charset)
 {
 	int		l;
-	int		i;
-	int		j;
 	int		s;
 	char	**strs;
 
@@ -104,9 +102,9 @@ char	**ft_split(char *str, char *charset)
 	return (strs);
 }
 
-// int	main()
+// int	main(void)
 // {
-// 	int i;
+// 	int	i;
 // 	int	j;
 // 	char **strs = ft_split("1645640789hello641364world466354", "0123456789");
 
