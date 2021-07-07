@@ -68,7 +68,7 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 	while (i < size)
 	{
 		ft_write(result, &k, strs[i]);
-		if (i > 0 && i < size - 1)
+		if (i < size - 1)
 			ft_write(result, &k, sep);
 		i++;
 	}
