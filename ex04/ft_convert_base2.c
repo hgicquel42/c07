@@ -30,10 +30,10 @@ int	ft_sign(char *nbr, int *i)
 	return (sign);
 }
 
-int	ft_check_base(char *base)
+unsigned int	ft_check_base(char *base)
 {
-	int	i;
-	int	l;
+	unsigned int	i;
+	unsigned int	l;
 
 	l = 0;
 	while (base[l])
@@ -54,10 +54,10 @@ int	ft_check_base(char *base)
 	return (l);
 }
 
-int	ft_check_bases(char *base_from, char *base_to)
+unsigned int	ft_check_bases(char *base_from, char *base_to)
 {
-	int	l_from;
-	int	l_to;
+	unsigned int	l_from;
+	unsigned int	l_to;
 
 	l_from = ft_check_base(base_from);
 	l_to = ft_check_base(base_to);

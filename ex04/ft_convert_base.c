@@ -41,7 +41,7 @@ unsigned int	ft_atoi_base(char *nbr, char *base_from, int *i)
 	return (n);
 }
 
-int	ft_count(unsigned int n, char *base_to, int l)
+int	ft_count(unsigned int n, char *base_to, unsigned int l)
 {
 	if (n < l)
 		return (1);
@@ -49,7 +49,7 @@ int	ft_count(unsigned int n, char *base_to, int l)
 		return (1 + ft_count(n / l, base_to, l));
 }
 
-int	ft_putnbr_base(char *result, unsigned int n, char *base_to, int l)
+int	ft_putnbr_base(char *result, unsigned int n, char *base_to, unsigned int l)
 {
 	int	i;
 
@@ -79,9 +79,9 @@ int	ft_read(char *nbr, char *base_from, int *sign)
 
 char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 {
-	unsigned int	n;
 	int				sign;
-	int				l_to;
+	unsigned int	n;
+	unsigned int	l_to;
 	int				count;
 	char			*result;
 
