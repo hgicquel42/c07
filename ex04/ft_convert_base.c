@@ -12,46 +12,17 @@
 
 #include <stdlib.h>
 
-#include <unistd.h>
-#include <stdio.h>
+int	ft_find(char	*str, char c);
 
-/**
- * Returns the index of c in str
- */
-int	ft_find(char	*str, char c)
+int	ft_sign(char *nbr, int *i);
+
+int	ft_check_bases(char *base_from, char *base_to);
+
+unsigned int	ft_atoi_base(char *nbr, char *base_from, int *i)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != c)
-		i++;
-	if (str[i] == c)
-		return (i);
-	return (-1);
-}
-
-/**
- * Returns 1 negative, 0 if positive
- */
-int	ft_sign(char *nbr, int *i)
-{
-	int sign;
-
-	sign = 0;
-	while (nbr[*i] == '+' || nbr[*i] == '-')
-	{
-		if (nbr[*i] == '-')
-			sign = !sign;
-		(*i)++;
-	}
-	return (sign);
-}
-
-int ft_atoi_base(char *nbr, char *base_from, int *i)
-{
-	int		n;
-	int		x;
-	int		l;
+	unsigned int	n;
+	int				x;
+	int				l;
 
 	l = 0;
 	while (base_from[l])
@@ -70,58 +41,60 @@ int ft_atoi_base(char *nbr, char *base_from, int *i)
 	return (n);
 }
 
-int	ft_count(int n, char *base_to, int l)
+int	ft_count(unsigned int n, char *base_to, int l)
 {
 	if (n < l)
-		return 1;
+		return (1);
 	else
-		return 1 + ft_count(n / l, base_to, l);
+		return (1 + ft_count(n / l, base_to, l));
 }
 
-int	ft_putnbr_base(char* result, int n, char *base_to, int l)
+int	ft_putnbr_base(char *result, unsigned int n, char *base_to, int l)
 {
 	int	i;
 
 	if (n < l)
 	{
 		result[0] = base_to[n];
-		return 1;
+		return (1);
 	}
 	else
 	{
 		i = ft_putnbr_base(result, n / l, base_to, l);
 		result[i] = base_to[n % l];
-		return i + 1;
+		return (i + 1);
 	}
+}
+
+int	ft_read(char *nbr, char *base_from, int *sign)
+{
+	int	i;
+
+	i = 0;
+	while (nbr[i] == ' ' || (nbr[i] >= 9 && nbr[i] <= 13))
+		i++;
+	*sign = ft_sign(nbr, &i);
+	return (ft_atoi_base(nbr, base_from, &i));
 }
 
 char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 {
-	int		i;
-	int		s;
-	int		n;
-	int		l;
-	int		c;
-	char	*result;
-	char	*start;
+	unsigned int	n;
+	int				sign;
+	int				l_to;
+	int				count;
+	char			*result;
 
-	i = 0;
-	s = ft_sign(nbr, &i);
-	n = ft_atoi_base(nbr, base_from, &i);
-	l = 0;
-	while (base_to[l])
-		l++;
-	c = ft_count(n, base_to, l);
-	result = malloc((s + c + 1) * sizeof(char));
-	if (s)
+	sign = 0;
+	l_to = ft_check_bases(base_from, base_to);
+	if (l_to == 0)
+		return (0);
+	n = ft_read(nbr, base_from, &sign);
+	count = ft_count(n, base_to, l_to);
+	result = malloc((sign + count + 1) * sizeof(char));
+	if (sign)
 		result[0] = '-';
-	start = &result[s];
-	ft_putnbr_base(start, n, base_to, l);
-	start[c] = '\0';
+	ft_putnbr_base(&result[sign], n, base_to, l_to);
+	(&result[sign])[count] = '\0';
 	return (result);
-}
-
-int	main()
-{
-	printf("%s\n", ft_convert_base("-100", "0123456789", "01"));
 }
