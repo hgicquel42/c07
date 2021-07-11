@@ -14,7 +14,7 @@
 
 // #include <stdio.h>
 
-int	ft_range(int **range, int min, int max)
+int	ft_ultimate_range(int **range, int min, int max)
 {
 	int	i;
 
@@ -42,7 +42,7 @@ int	ft_range(int **range, int min, int max)
 // 	int	*range;
 // 	int min = atoi(argv[1]);
 // 	int max = atoi(argv[2]);
-// 	int	count = ft_range(&range, min, max);
+// 	int	count = ft_ultimate_range(&range, min, max);
 
 // 	for (int i = 0; i < count; i++)
 // 		printf("%d\n", range[i]);
