@@ -12,27 +12,40 @@
 
 #include <stdlib.h>
 
-int	ft_ultimate_range(int **range, int min, int max)
+// #include <stdio.h>
+
+int	ft_range(int **range, int min, int max)
 {
-	int	*tab;
-	int	count;
 	int	i;
 
-	count = max - min;
-	if (count < 1)
+	if (min >= max)
 	{
 		*range = 0;
 		return (0);
 	}
-	tab = malloc(count * sizeof(int));
-	if (!tab)
+	*range = malloc((max - min) * sizeof(int));
+	if (!(*range))
 		return (-1);
 	i = 0;
-	while (i < count)
+	while (i < (max - min))
 	{
-		tab[i] = min + i;
+		(*range)[i] = min + i;
 		i++;
 	}
-	*range = tab;
-	return (count);
+	return (max - min);
 }
+
+// int	main(int argc, char	**argv)
+// {
+// 	if (argc != 3)
+// 		return (1);
+// 	int	*range;
+// 	int min = atoi(argv[1]);
+// 	int max = atoi(argv[2]);
+// 	int	count = ft_range(&range, min, max);
+
+// 	for (int i = 0; i < count; i++)
+// 		printf("%d\n", range[i]);
+// 	printf("total %d\n", count);
+// 	return (0);
+// }

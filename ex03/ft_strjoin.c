@@ -12,6 +12,8 @@
 
 #include <stdlib.h>
 
+#include <stdio.h>
+
 int	ft_strlen(char *src)
 {
 	int	i;
@@ -22,36 +24,30 @@ int	ft_strlen(char *src)
 	return (i);
 }
 
-void	ft_write(char *result, int *k, char *src)
+int	ft_strlen_all(int size, char **strs, char *sep)
+{
+	int	i;
+	int	l;
+
+	l = 0;
+	i = 0;
+	while (i < size)
+	{
+		l += ft_strlen(strs[i++]);
+		if (i < size)
+			l += ft_strlen(sep);
+	}
+	return (l);
+}
+
+int	ft_write(char *result, char *src, int offset)
 {
 	int	i;
 
 	i = 0;
 	while (src[i])
-	{
-		result[*k] = src[i];
-		(*k)++;
-		i++;
-	}
-}
-
-int	ft_strlen_all(int size, char **strs, char *sep)
-{
-	int	i;
-	int	l;
-	int	s;
-
-	l = 0;
-	i = 0;
-	s = ft_strlen(sep);
-	while (i < size)
-	{
-		l += ft_strlen(strs[i]);
-		if (i > 0 && i < size - 1)
-			l += s;
-		i++;
-	}
-	return (l);
+		result[offset++] = src[i++];
+	return (i);
 }
 
 char	*ft_strjoin(int size, char **strs, char *sep)
@@ -63,15 +59,21 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 
 	l = ft_strlen_all(size, strs, sep);
 	result = malloc((l + 1) * sizeof(char));
+	if (!result)
+		return (0);
 	k = 0;
 	i = 0;
 	while (i < size)
 	{
-		ft_write(result, &k, strs[i]);
-		if (i < size - 1)
-			ft_write(result, &k, sep);
-		i++;
+		k += ft_write(result, strs[i++], k);
+		if (i < size)
+			k += ft_write(result, sep, k);
 	}
 	result[k] = '\0';
 	return (result);
+}
+
+int	main(int argc, char **argv)
+{
+	printf("%s\n", ft_strjoin(argc - 1, &argv[1], " "));
 }

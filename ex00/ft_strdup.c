@@ -12,6 +12,8 @@
 
 #include <stdlib.h>
 
+// #include <stdio.h>
+
 char	*ft_strdup(char *src)
 {
 	int		l;
@@ -33,3 +35,11 @@ char	*ft_strdup(char *src)
 	dest[i] = '\0';
 	return (dest);
 }
+
+// int	main(int argc, char **argv)
+// {
+// 	if (argc != 2)
+// 		return (1);
+// 	printf("%s\n", ft_strdup(argv[1]));
+// 	return (0);
+// }
