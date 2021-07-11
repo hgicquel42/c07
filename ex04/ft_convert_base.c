@@ -92,6 +92,8 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 	n = ft_read(nbr, base_from, &sign);
 	count = ft_count(n, base_to, l_to);
 	result = malloc((sign + count + 1) * sizeof(char));
+	if (!result)
+		return (0);
 	if (sign)
 		result[0] = '-';
 	ft_putnbr_base(&result[sign], n, base_to, l_to);

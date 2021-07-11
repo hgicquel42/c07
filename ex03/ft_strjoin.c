@@ -12,7 +12,7 @@
 
 #include <stdlib.h>
 
-#include <stdio.h>
+// #include <stdio.h>
 
 int	ft_strlen(char *src)
 {
@@ -73,7 +73,7 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 	return (result);
 }
 
-int	main(int argc, char **argv)
-{
-	printf("%s\n", ft_strjoin(argc - 1, &argv[1], " "));
-}
+// int	main(int argc, char **argv)
+// {
+// 	printf("%s\n", ft_strjoin(argc - 1, &argv[1], "-"));
+// }
