@@ -25,14 +25,14 @@ int	ft_count(char *str, char *charset, int l)
 	s = 0;
 	while (str[i])
 	{
-		if (ft_include(charset, l, str[i++]))
-			continue ;
-		i--;
+		while (str[i] && ft_include(charset, l, str[i]))
+			i++;
 		j = 0;
 		while (str[i + j] && !ft_include(charset, l, str[i + j]))
 			j++;
+		if (j)
+			s++;
 		i += j;
-		s++;
 	}
 	return (s);
 }
@@ -47,15 +47,14 @@ void	ft_alloc(char **strs, char *str, char *charset, int l)
 	s = 0;
 	while (str[i])
 	{
-		if (ft_include(charset, l, str[i++]))
-			continue ;
-		i--;
-		j = 1;
+		while (str[i] && ft_include(charset, l, str[i]))
+			i++;
+		j = 0;
 		while (str[i + j] && !ft_include(charset, l, str[i + j]))
 			j++;
-		strs[s] = malloc((j + 1) * sizeof(char));
+		if (j)
+			strs[s++] = malloc((j + 1) * sizeof(char));
 		i += j;
-		s++;
 	}
 	strs[s] = 0;
 }
@@ -70,19 +69,17 @@ void	ft_fill(char **strs, char *str, char *charset, int l)
 	s = 0;
 	while (str[i])
 	{
-		if (ft_include(charset, l, str[i++]))
-			continue ;
-		i--;
-		strs[s][0] = str[i];
-		j = 1;
+		while (str[i] && ft_include(charset, l, str[i]))
+			i++;
+		j = 0;
 		while (str[i + j] && !ft_include(charset, l, str[i + j]))
 		{
 			strs[s][j] = str[i + j];
 			j++;
 		}
-		strs[s][j] = '\0';
+		if (j)
+			strs[s++][j] = '\0';
 		i += j;
-		s++;
 	}
 }
 
@@ -102,12 +99,15 @@ char	**ft_split(char *str, char *charset)
 	return (strs);
 }
 
-// int	main(void)
+// int	main(int argc, char **argv)
 // {
-// 	int	i;
-// 	int	j;
-// 	char **strs = ft_split("1645640789hello641364world466354", "0123456789");
+// 	int		i;
+// 	int		j;
+// 	char	**strs;
 
+// 	if (argc != 3)
+// 		return (1);
+// 	strs = ft_split(argv[1], argv[2]);
 // 	i = 0;
 // 	while (strs[i])
 // 	{
